@@ -8,6 +8,6 @@
     "esModuleInterop": true,      // Biar bisa import default dari CommonJS library (misal express)
     "skipLibCheck": true          // Lewati pengecekan type di node_modules supaya compile lebih cepat
   },
-  "include": ["src/**/*"],         // Semua file di folder src/ akan di-compile
+  "include": ["src/**/*", "src/types/**/*"],     // Semua file di folder src/ akan di-compile
   "exclude": ["node_modules"]      // Node_modules tidak di-compile
 }

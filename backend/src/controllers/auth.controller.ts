@@ -2,9 +2,11 @@ import { Response, Request } from "express";
 import * as schemas from "../schemas/auth.schema";
 import User from "../models/user.model";
 import { generateToken } from "../lib/utils";
-import { email, ZodError } from "zod";
+import { ZodError } from "zod";
 import { sendWelcomeEmail } from "../emails/emailHandlers";
 import { ENV } from "../lib/env";
+import { AuthRequest } from "../middleware/auth.middleware";
+import cloudinary from "../lib/cloudinary";
 
 export const signup = async (req: Request, res: Response) => {
     try {
@@ -89,4 +91,36 @@ export const logout = async (req: Request, res: Response) => {
   res.cookie("jwt", "", { maxAge: 0 });
   res.status(200).json({ message: "Logged out successfully" });
 
+}
+
+export const updateProfile = async (req: AuthRequest, res: Response) => {
+    try {
+        const validatedData = schemas.updateProfileSchema.parse(req.body.profilePic)
+
+        if (!req.user) {
+            return res.status(401).json({ message: "Unauthorized: user not found in request" });
+        }
+        const userId = req.user._id
+
+        const uploadResponse = await cloudinary.uploader.upload(validatedData.profilePic, { folder: "profile_pics" });
+
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            { profilePic: uploadResponse.secure_url },
+            { new: true, select: "-password" }
+        );
+
+        res.status(200).json(updatedUser)
+
+    } catch (error) {
+        if (error instanceof ZodError) {
+            return res.status(400).json({
+                message: "Validation error",
+                errors: error.issues
+            })
+        }
+
+        console.error("Error in updateProfile controller:", error)
+        res.status(500).json({message: "Internal server error"})
+    }   
 }

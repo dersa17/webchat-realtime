@@ -1,9 +1,12 @@
 import { Router, Request, Response } from 'express';
 import * as authController from "./controllers/auth.controller"
 import { AuthRequest, protectRoute } from './middleware/auth.middleware';
+import {arcjetProtection} from "./middleware/arcjet.middleware"
 
 
 const router = Router();
+
+router.use(arcjetProtection)
 
 router.get("/health", (req: Request, res: Response) => {
     res.status(200).send("API is healthy");

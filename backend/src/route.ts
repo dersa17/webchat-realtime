@@ -8,6 +8,9 @@ router.get("/health", (req: Request, res: Response) => {
     res.status(200).send("API is healthy");
 });
 
-
 router.post("/auth/signup", authController.signup)
+router.post("/auth/login", authController.login)
+router.post("/auth/logout", authController.logout)
+
+
 export default router;

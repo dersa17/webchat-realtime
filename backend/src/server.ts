@@ -1,21 +1,20 @@
 import express from "express";
-import dotenv from "dotenv";
+import { ENV } from "./lib/env";
 import router from "./route";
 import path from "path";
 import { connectDB } from "./lib/db";
 
-dotenv.config();
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+const PORT = ENV.PORT || 3000;
 
 app.use(express.json())
 
 app.use("/api", router);
 
 // Deploy sebagai SPA (Single Page Application)
-if (process.env.NODE_ENV == "production") {
+if (ENV.NODE_ENV == "production") {
   // Path absolut ke folder build frontend
   const frontendDistPath = path.resolve(__dirname, "../../frontend/dist");
 

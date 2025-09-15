@@ -3,6 +3,7 @@ import { ENV } from "./lib/env";
 import router from "./route";
 import path from "path";
 import { connectDB } from "./lib/db";
+import cookieParser from "cookie-parser"
 
 
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 const PORT = ENV.PORT || 3000;
 
 app.use(express.json())
+app.use(cookieParser())
 
 app.use("/api", router);
 

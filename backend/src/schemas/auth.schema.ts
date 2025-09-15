@@ -10,3 +10,8 @@ export const loginSchema = z.object({
   email: z.string().nonempty("Email is required").email("Invalid email"),
   password: z.string().nonempty("Password is Required"),
 });
+
+
+export const updateProfileSchema = z.object({
+  profilePic: z.string().url("Invalid URL").nonempty("Profile picture URL is required"),
+});

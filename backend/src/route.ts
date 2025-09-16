@@ -22,6 +22,6 @@ router.get("/messages/chats", protectRoute, messageController.getChatPartners);
 router.get("/messages/:id", protectRoute, messageController.getMessagesByUserId);
 router.post("/messages/send/:id", protectRoute, messageController.sendMessage);
 
-router.get("/check", protectRoute, (req: AuthRequest, res: Response) => res.status(200).json(req.user));
+router.get("/auth/check", protectRoute, (req: AuthRequest, res: Response) => res.status(200).json(req.user));
 
 export default router;

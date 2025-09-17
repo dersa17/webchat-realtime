@@ -21,9 +21,9 @@ function App() {
   return (
     <div className="min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
     <Routes>
-      <Route path="/" element={authUser ? <Chat /> : <Navigate to="/login" />} />
-      <Route path="/signup" element={!authUser ? <Signup /> : <Navigate to="/" />} />
-      <Route path="/login" element={!authUser ? <Login /> : <Navigate to="/" />} />
+      <Route path="/" element={authUser ? <Chat/> : <Navigate to="/login"/>} />
+      <Route path="/signup" element={!authUser ? <Signup/> : <Navigate to="/"/>} />
+      <Route path="/login" element={!authUser ? <Login/> : <Navigate to="/"/>} />
     </Routes>
     <Toaster/>
     </div>

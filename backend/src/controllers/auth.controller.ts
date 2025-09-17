@@ -65,11 +65,11 @@ export const login = async (req: Request, res: Response) => {
 
         generateToken(user._id, res) 
 
-        res.status(400).json({
+        res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             email: user.email,
-            prfilePic: user.profilePic
+            profilePic: user.profilePic
         })
 
     } catch (error) {

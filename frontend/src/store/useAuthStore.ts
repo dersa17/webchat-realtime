@@ -3,12 +3,12 @@ import axiosInstance from "@/lib/axios"
 import toast from "react-hot-toast";
 
 type AuthStore = {
-    authUser: null | { id: string, email: string, fullname: string }
+    authUser: null | { id: string, email: string, fullName: string }
     isCheckingAuth: boolean
     isSigningUp: boolean
     isLoggingIn: boolean
     login: (data: {email: string, password: string}) => Promise<void>
-    // logout: () => Promise<void>
+    logout: () => Promise<void>
     checkAuth: () => Promise<void>
     signup: (data: { fullName: string, email: string, password: string }) => Promise<void>
 }
@@ -68,6 +68,18 @@ export const useAuthStore = create<AuthStore>((set) => ({
         } finally {
             set({isLoggingIn: false})
         }
+    },
+
+    logout: async () => {
+    try {
+      await axiosInstance.post("/auth/logout");
+      set({ authUser: null });
+      toast.success("Logged out successfully");
+    //   get().disconnectSocket();
+    } catch (error) {
+      toast.error("Error logging out");
+      console.log("Logout error:", error);
     }
+  },
     
 }))

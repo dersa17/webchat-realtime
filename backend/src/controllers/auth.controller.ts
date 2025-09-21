@@ -95,14 +95,15 @@ export const logout = async (req: Request, res: Response) => {
 
 export const updateProfile = async (req: AuthRequest, res: Response) => {
     try {
-        const validatedData = schemas.updateProfileSchema.parse(req.body.profilePic)
+        const validatedData = schemas.updateProfileSchema.parse(req.body)
+        const {profilePic} = validatedData
 
         if (!req.user) {
             return res.status(401).json({ message: "Unauthorized: user not found in request" });
         }
         const userId = req.user._id
 
-        const uploadResponse = await cloudinary.uploader.upload(validatedData.profilePic, { folder: "profile_pics" });
+        const uploadResponse = await cloudinary.uploader.upload(profilePic, { folder: "profile_pics" });
 
         const updatedUser = await User.findByIdAndUpdate(
             userId,

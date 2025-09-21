@@ -19,7 +19,7 @@ function App() {
       return <Loader />
     }
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 overflow-hidden relative">
+    <div className="min-h-screen flex items-center justify-center  overflow-hidden relative">
     <Routes>
       <Route path="/" element={authUser ? <Chat/> : <Navigate to="/login"/>} />
       <Route path="/signup" element={!authUser ? <Signup/> : <Navigate to="/"/>} />

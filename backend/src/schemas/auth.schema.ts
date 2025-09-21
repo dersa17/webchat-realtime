@@ -13,5 +13,5 @@ export const loginSchema = z.object({
 
 
 export const updateProfileSchema = z.object({
-  profilePic: z.string().url("Invalid URL").nonempty("Profile picture URL is required"),
+  profilePic: z.string().nonempty("Profile picture URL is required"),
 });

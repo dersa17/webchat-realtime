@@ -5,16 +5,16 @@ import toast from "react-hot-toast"
 
 
 type ChatStore = {
-    allContacts: null | {id: string, email: string, fullName: string, profilePic?: string }[]
-    chats: null | {senderId: string, reaciverId: string, text: string, image: string}[]
+    allContacts: {_id: string, email: string, fullName: string, profilePic?: string }[]
+    chats: {_id: string, email: string, fullName: string, profilePic?: string}[]
     messages: null | []
     activeTab: string
-    selectedUser: null | {id: string, email: string, fullName: string, profilePic?: string }
+    selectedUser: null | {_id: string, email: string, fullName: string, profilePic?: string }
     isUsersLoading: boolean
     isMessagesLoading: boolean
 
     setActiveTab: (tab: string) => void
-    setSelectedUser: (selectedUser: {id: string, email: string, fullName: string, profilePic?: string } ) => void
+    setSelectedUser: (selectedUser: {_id: string, email: string, fullName: string, profilePic?: string  } ) => void
     getAllContacts: () => Promise<void>
     getMyChatPartners: () => Promise<void>
 }

@@ -11,6 +11,7 @@ type AuthStore = {
     logout: () => Promise<void>
     checkAuth: () => Promise<void>
     signup: (data: { fullName: string, email: string, password: string }) => Promise<void>
+    updateProfile: (profilePic :string) => Promise<void>
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -79,6 +80,17 @@ export const useAuthStore = create<AuthStore>((set) => ({
     } catch (error) {
       toast.error("Error logging out");
       console.log("Logout error:", error);
+    }
+  },
+
+updateProfile: async (profilePic) => {
+    try {
+      const res = await axiosInstance.put("/auth/update-profile", {profilePic});
+      set({ authUser: res.data });
+      toast.success("Profile updated successfully");
+    } catch (error) {
+      console.log("Error in update profile:", error);
+      toast.error(error.response.data.message);
     }
   },
     

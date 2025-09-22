@@ -6,7 +6,7 @@ import ChatContainer from "@/components/ChatContainer";
 import NoConversationPlaceholder from "@/components/NoConversationPlaceholder";
 
 function Chat() {
-  const { activeTab, selectedUser } = useChatStore();
+  const { selectedUser } = useChatStore();
 
   return (
     <div className="w-full flex h-screen overflow-hidden shadow-lg">

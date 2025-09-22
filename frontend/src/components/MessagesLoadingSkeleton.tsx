@@ -2,6 +2,7 @@ import { Skeleton } from "./ui/skeleton"
 
 const MessagesLoadingSkeleton = () => {
   return (
+    
     <div className="max-w-5xl mx-auto space-y-4">
       {[...Array(6)].map((_, index) => {
         const isLeft = index % 2 === 0; // bubble kiri/kanan gantian

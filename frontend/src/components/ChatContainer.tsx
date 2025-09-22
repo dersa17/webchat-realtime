@@ -2,13 +2,21 @@ import ChatHeader from "./ChatHeader";
 import NoChatHistoryPlaceholder from "./NoChatHistoryPlaceholder";
 // import { useAuthStore } from "@/store/useAuthStore" 
 import { useChatStore } from "@/store/useChatStore"; 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import MessageInput from "./MessageInput";
 import MessagesLoadingSkeleton from "./MessagesLoadingSkeleton";
 const ChatContainer = () => {
   const { selectedUser, getMessagesByUserId, messages, isMessagesLoading } = useChatStore(); 
   // const {authUser} = useAuthStore() 
   useEffect(() => { getMessagesByUserId(selectedUser!._id); }, [selectedUser, getMessagesByUserId]);
+
+const messageEndRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (messageEndRef.current) {
+      messageEndRef.current.scrollIntoView({behavior: "smooth"})
+    }
+  }, [messages])
 
   return (
     <>
@@ -32,7 +40,10 @@ const ChatContainer = () => {
                       : "bg-indigo-500 text-white" // chat dari kita
                   }`}
                 >
-                  {message.text}
+                  {message.image && (
+                    <img src={message.image} alt="Shared" className="rounded-lg h-48 object-cover" />
+                  )}
+                  {message.text && <p>{message.text}</p>}
                    <p className="text-xs mt-1 opacity-75 flex items-center gap-1">
                     {new Date(message.createdAt).toLocaleTimeString(undefined, {
                       hour: "2-digit",
@@ -42,6 +53,7 @@ const ChatContainer = () => {
                 </div>
               </div>
             ))}
+            <div ref={messageEndRef}/>
           </div>
         ) : isMessagesLoading ? <MessagesLoadingSkeleton /> : (
           <NoChatHistoryPlaceholder name={selectedUser!.fullName} />

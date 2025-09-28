@@ -4,7 +4,7 @@ import { isSpoofedBot } from "@arcjet/inspect"
 
 export const arcjetProtection = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const decision = await aj.protect(req)
+        const decision = await (await aj).protect(req)
         if (decision.isDenied()) {
             if (decision.reason.isRateLimit()) {
                 return res.status(429).json({ message: "Rate limit exceeded. Please try again later." })

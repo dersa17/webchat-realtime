@@ -3,9 +3,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "./ui/button";
 import { XIcon } from "lucide-react";
 import { useEffect } from "react";
+import { useAuthStore } from "@/store/useAuthStore";
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
-
+   const { onlineUsers } = useAuthStore();
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
         if (event.key === "Escape") {
@@ -30,11 +31,19 @@ const ChatHeader = () => {
             </AvatarFallback>
           </Avatar>
           {/* Online indicator */}
-          <span className="absolute top-0 right-0 block w-3 h-3 rounded-full bg-green-500 ring-1 ring-white dark:ring-gray-800"></span>
+    {selectedUser?._id && onlineUsers.includes(selectedUser._id) && (
+  <span className="absolute top-0 right-0 block w-3 h-3 rounded-full bg-green-500 ring-1 ring-white dark:ring-gray-800"></span>
+)}
+
         </div>
         <div>
           <h3 className="font-medium">{selectedUser?.fullName}</h3>
-          <p className="text-green-500 text-xs">Online</p>
+      {selectedUser?._id && onlineUsers.includes(selectedUser._id) ? (
+  <p className="text-green-500 text-xs">Online</p>
+) : (
+  <p className="text-gray-500 text-xs">Offline</p>
+)}
+
         </div>
       </div>
       <Button

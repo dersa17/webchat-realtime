@@ -55,5 +55,5 @@ Frontend: http://localhost:5173
 
 ## Live Demo
 
-Project is deployed on Vercel:  
+Project is deployed on Sevalla:  
 👉 [https://webchat-realtime-n8354.sevalla.app](https://webchat-realtime-n8354.sevalla.app)

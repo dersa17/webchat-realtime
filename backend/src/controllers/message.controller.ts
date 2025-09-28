@@ -1,4 +1,5 @@
 import cloudinary from "../lib/cloudinary";
+import { getReceiverSocketId, io } from "../lib/socket";
 import { AuthRequest } from "../middleware/auth.middleware";
 // import { getReceiverSocketId, io } from "../lib/socket";
 import Message from "../models/message.model";
@@ -79,10 +80,10 @@ export const sendMessage = async (req: AuthRequest, res: Response) => {
 
     await newMessage.save();
 
-    // const receiverSocketId = getReceiverSocketId(receiverId);
-    // if (receiverSocketId) {
-    //   io.to(receiverSocketId).emit("newMessage", newMessage);
-    // }
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("newMessage", newMessage);
+    }
 
     res.status(201).json(newMessage);
   } catch (error) {

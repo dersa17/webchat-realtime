@@ -1,5 +1,5 @@
 import { Response, Request, NextFunction } from "express"
-import aj from "../lib/arcjet"
+import {aj} from "../lib/arcjet"
 import { isSpoofedBot } from "@arcjet/inspect"
 
 export const arcjetProtection = async (req: Request, res: Response, next: NextFunction) => {

@@ -44,12 +44,12 @@ function ProfileHeader() {
             >
               <Avatar className="h-14 w-14">
                 <AvatarImage
-                  src={selectedImage || authUser.profilePic || "/avatar.png"}
+                  src={selectedImage || authUser?.profilePic || "/avatar.png"}
                   alt="User image"
                   className="object-cover"
                 />
                 <AvatarFallback className="bg-gray-200 text-gray-600">
-                  {authUser.fullName?.charAt(0) || "U"}
+                  {authUser?.fullName?.charAt(0) || "U"}
                 </AvatarFallback>
               </Avatar>
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
@@ -69,7 +69,7 @@ function ProfileHeader() {
           {/* USER INFO */}
           <div>
             <h3 className="font-semibold text-sm text-gray-800 max-w-[180px] truncate">
-              {authUser.fullName}
+              {authUser?.fullName}
             </h3>
             <p className="text-green-500 text-xs">Online</p>
           </div>

@@ -3,11 +3,12 @@ import { useChatStore } from "../store/useChatStore"
 import UserLoadingSkeleton from "./UserLoadingSkeleton"
 import NoChatsFound from "./NoChatFound"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { useAuthStore } from "@/store/useAuthStore"
 
 function ChatsList() {
   const { getMyChatPartners, chats, isUsersLoading, setSelectedUser } =
     useChatStore()
-  // const { onlineUsers } = useAuthStore();
+  const { onlineUsers } = useAuthStore();
 
   useEffect(() => {
     getMyChatPartners()
@@ -33,8 +34,12 @@ function ChatsList() {
                   {chat.fullName?.charAt(0).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
-              {/* Online indicator (dummy, bisa pakai chat.isOnline nanti) */}
-              <span className="absolute top-0 right-0 block w-3 h-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-gray-800"></span>
+              {
+  onlineUsers.includes(chat._id) && (
+    <span className="absolute top-0 right-0 block w-3 h-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-gray-800"></span>
+  )
+}
+
             </div>
 
             <h4 className="text-gray-800 dark:text-gray-200 font-medium truncate">

@@ -21,6 +21,8 @@ type ChatStore = {
     getMyChatPartners: () => Promise<void>
     getMessagesByUserId: (userId: string) => Promise<void>
     sendMessage: (messageData: { text: string, image: string | null }) => Promise<void>
+    subscribeToMessages: () => void
+    unsubscribeFromMessages: () => void
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -85,7 +87,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     const {authUser} = useAuthStore.getState()
     const tempId = `temp-${Date.now()}`
 
-    if (!selectedUser) return
+    if (!selectedUser || !authUser) return
 
     const optimisticMessage = {
       _id: tempId,
@@ -110,6 +112,29 @@ export const useChatStore = create<ChatStore>((set, get) => ({
       }>;
       toast.error(err.response?.data?.message || "Something went wrong");
     }
-  }
+  },
+
+  subscribeToMessages: () => {
+    const {selectedUser} = get()
+    if (!selectedUser) return
+
+    const socket = useAuthStore.getState().socket
+
+    socket?.on("newMessage",  (newMessage) => {
+      const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id
+
+      if (!isMessageSentFromSelectedUser) return
+
+      const currentMessage = get().messages
+      set({messages: [...currentMessage, newMessage]})
+
+    })
+  },
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket
+    socket?.off("newMessage")
+  },
+
+
 
 }))

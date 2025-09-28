@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import User, { IUser } from "../models/user.model";
-import { ENV } from "../lib/env";
+import User, { IUser } from "../models/user.model.js";
+import { ENV } from "../lib/env.js";
 
 // Interface custom untuk request yang punya user
 export interface AuthRequest extends Request {

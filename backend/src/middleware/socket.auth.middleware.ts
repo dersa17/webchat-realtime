@@ -1,8 +1,8 @@
 import { Socket } from "socket.io";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import cookie from "cookie";
-import User, { IUser } from "../models/user.model";
-import { ENV } from "../lib/env";
+import User, { IUser } from "../models/user.model.js";
+import { ENV } from "../lib/env.js";
 
 // definisi payload JWT kustom
 export interface CustomJwtPayload extends JwtPayload {

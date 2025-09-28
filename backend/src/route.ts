@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-import * as authController from "./controllers/auth.controller"
-import * as messageController from "./controllers/message.controller"
-import { AuthRequest, protectRoute } from './middleware/auth.middleware';
-import {arcjetProtection} from "./middleware/arcjet.middleware"
+import * as authController from "./controllers/auth.controller.js"
+import * as messageController from "./controllers/message.controller.js"
+import { AuthRequest, protectRoute } from './middleware/auth.middleware.js';
+import {arcjetProtection} from "./middleware/arcjet.middleware.js"
 
 const router = Router();
 

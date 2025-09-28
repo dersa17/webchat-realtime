@@ -1,4 +1,4 @@
-import { ENV } from "./env";
+import { ENV } from "./env.js";
 
 // export dalam bentuk Promise, karena kita pakai dynamic import
 export const aj = (async () => {

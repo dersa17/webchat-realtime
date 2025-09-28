@@ -1,11 +1,11 @@
 import express from "express";
-import { ENV } from "./lib/env";
-import router from "./route";
+import { ENV } from "./lib/env.js";
+import router from "./route.js";
 import path from "path";
-import { connectDB } from "./lib/db";
+import { connectDB } from "./lib/db.js";
 import cookieParser from "cookie-parser"
 import cors from "cors";
-import { app, server } from "./lib/socket";
+import { app, server } from "./lib/socket.js";
 
 
 

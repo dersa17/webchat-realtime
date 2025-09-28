@@ -1,12 +1,12 @@
 import { Response, Request } from "express";
-import * as schemas from "../schemas/auth.schema";
-import User from "../models/user.model";
-import { generateToken } from "../lib/utils";
+import * as schemas from "../schemas/auth.schema.js";
+import User from "../models/user.model.js";
+import { generateToken } from "../lib/utils.js";
 import { ZodError } from "zod";
-import { sendWelcomeEmail } from "../emails/emailHandlers";
-import { ENV } from "../lib/env";
-import { AuthRequest } from "../middleware/auth.middleware";
-import cloudinary from "../lib/cloudinary";
+import { sendWelcomeEmail } from "../emails/emailHandlers.js";
+import { ENV } from "../lib/env.js";
+import { AuthRequest } from "../middleware/auth.middleware.js";
+import cloudinary from "../lib/cloudinary.js";
 
 export const signup = async (req: Request, res: Response) => {
     try {

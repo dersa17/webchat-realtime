@@ -1,9 +1,9 @@
-import cloudinary from "../lib/cloudinary";
-import { getReceiverSocketId, io } from "../lib/socket";
-import { AuthRequest } from "../middleware/auth.middleware";
+import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
+import { AuthRequest } from "../middleware/auth.middleware.js";
 // import { getReceiverSocketId, io } from "../lib/socket";
-import Message from "../models/message.model";
-import User from "../models/user.model";
+import Message from "../models/message.model.js";
+import User from "../models/user.model.js";
 import {Response, Request} from "express"
 
 export const getAllContacts = async (req: AuthRequest, res: Response) => {

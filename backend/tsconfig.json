@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2020",           // Versi JS output, mendukung fitur modern tapi kompatibel Node.js
-    "module": "CommonJS",         // Module system Node.js, supaya import/export lancar
+ "module": "NodeNext",
+"moduleResolution": "NodeNext",
     "rootDir": "src",             // Folder source TypeScript
     "outDir": "dist",             // Folder hasil compile JS
     "strict": true,               // Aktifkan strict type checking, lebih aman

@@ -2,8 +2,6 @@
 
 ### 1. Setup environment variables
 
-Copy the `.env.example` file into `.env.local`:
-
 ```bash
 cd backend touch .env
 ```
@@ -44,7 +42,7 @@ npm run dev
 ```
 #### Frontend
 ```bash
-cd backend
+cd frontend
 npm install
 npm run dev
 ```
